@@ -1,7 +1,9 @@
-import 'package:phone_auth/features/features.dart';
+
+
+import '../firebase_phone_auth.dart';
 
 class AppBindings {
-  static List<Bind> Binds = [
+  static List<Bind> binds = [
     Bind.put(LogInController()),
   ];
 }

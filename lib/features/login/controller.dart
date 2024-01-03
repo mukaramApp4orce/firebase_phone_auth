@@ -1,4 +1,4 @@
-import '../features.dart';
+import '../../firebase_phone_auth.dart';
 
 class LogInController extends GetxController {
   TextEditingController phoneNumber = TextEditingController();
@@ -9,21 +9,19 @@ class LogInController extends GetxController {
   final validateOtp = GlobalKey<FormState>();
 
   void sendOrVerifyOtp() {
-    if (validateOtp.currentState!.validate() ||
-        validatePhone.currentState!.validate()) {
-      isCodeSend = !isCodeSend;
-      update();
-      debugPrint("$isCodeSend");
-      if (isCodeSend) {
-        Future.delayed(const Duration(seconds: 60), () {
-          isCodeSend = false;
-          update();
-        });
-        sendCode();
-      } else {
-        verifyOTP();
-      }
+    isCodeSend = !isCodeSend;
+    update();
+    debugPrint("Is Code is Send $isCodeSend");
+    if (isCodeSend) {
+      Future.delayed(const Duration(seconds: 60), () {
+        isCodeSend = false;
+        update();
+      });
+      sendCode();
+    } else {
+      verifyOTP();
     }
+
     update();
   }
 
@@ -37,8 +35,8 @@ class LogInController extends GetxController {
     });
   }
 
-  verifyOTP() async {
-    await PhoneAuthService.verifyOtp(
+  verifyOTP() {
+    PhoneAuthService.verifyOtp(
       verifyCode: verifyCode.text,
     ).then((isVerify) {
       if (isVerify) {

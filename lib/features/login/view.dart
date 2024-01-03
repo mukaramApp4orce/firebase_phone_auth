@@ -1,7 +1,7 @@
-import '../features.dart';
+import '../../firebase_phone_auth.dart';
 
-class Login extends GetView<LogInController> {
-  const Login({super.key});
+class LoginView extends GetView<LogInController> {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +25,6 @@ class Login extends GetView<LogInController> {
                       labelText: "+923001234567",
                       prefixText: "+92",
                     ),
-                    validator: (val) {
-                      return val != null && val.length != 10
-                          ? "Invalid Phone"
-                          : null;
-                    },
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -45,21 +40,14 @@ class Login extends GetView<LogInController> {
                         border: OutlineInputBorder(),
                         hintText: "OTP",
                       ),
-                      validator: (val) {
-                        return val != null && val.length != 6
-                            ? "Invalid Otp"
-                            : null;
-                      },
                     ),
                   ),
                 ),
                 const SizedBox(height: 20),
 
-                //*
+                //* send OTP
                 ElevatedButton(
-                  onPressed: () async {
-                    controller.sendOrVerifyOtp();
-                  },
+                  onPressed: controller.sendOrVerifyOtp,
                   child: Text(controller.isCodeSend ? "Verify" : "Send Code"),
                 )
               ],

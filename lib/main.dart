@@ -1,10 +1,4 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:phone_auth/features/login/login_view.dart';
-import 'package:phone_auth/firebase_options.dart';
-
-import 'app_bindings/app_bindings.dart';
+import 'firebase_phone_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,13 +15,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      binds: AppBindings.Binds,
+      binds: AppBindings.binds,
       title: 'Phone Auth',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Login(),
+      home: const LoginView(),
     );
   }
 }
