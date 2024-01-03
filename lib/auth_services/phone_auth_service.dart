@@ -1,5 +1,3 @@
-
-
 import '../firebase_phone_auth.dart';
 
 class PhoneAuthService {
@@ -11,7 +9,7 @@ class PhoneAuthService {
       verificationCompleted: (PhoneAuthCredential credential) async {
         return;
       },
-      timeout: const Duration(seconds: 60),
+      // timeout: const Duration(seconds: 60),
       verificationFailed: (FirebaseAuthException e) {
         debugPrint("$e");
         switch (e.code) {
@@ -39,7 +37,8 @@ class PhoneAuthService {
         verificationId: _verifyId,
         smsCode: verifyCode,
       );
-      if (credential.accessToken != null) {
+
+      if (credential.verificationId != null) {
         isVerified = true;
       } else {
         isVerified = false;
